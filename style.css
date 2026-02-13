@@ -1,0 +1,971 @@
+
+/* Кнопки серий, карточки и основные кнопки */
+.ep-btn.active-ep, .back-btn, .tab-btn.active {
+    background: var(--main-gradient) !important;
+    border: none;
+    color: rgb(255, 255, 255);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+}
+.tab-btn.active
+/* Полоска прогресса в плеере */
+.progress-bar {
+    background: var(--main-gradient) !important;
+    height: 100%;
+    border-radius: 5px;
+}
+
+
+/* Эффекты при наведении */
+.anime-card:hover {
+    border: 2px solid #00d2ff;
+    transform: translateY(-5px);
+    transition: 0.3s;
+} 
+body {
+    background-color: var(--bg-dark);
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    color: white;
+}
+/* Центральный круг при паузе */
+.play-overlay {
+    background: #8a2be233;
+    border: 2px solid #6501c233;
+}
+
+/* Иконки (если они сделаны через CSS) */
+.play-icon, .fullscreen-icon {
+    background-color: #fff; /* Белый на фоне градиента смотрится лучше всего */
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background-color: #0b0b0b; color: white; display: flex; overflow-x: hidden; }
+
+/* Sidebar */
+.sidebar { width: 250px; height: 100vh; background: #121212; padding: 20px; position: fixed; border-right: 1px solid #222; }
+.logo { font-size: 24px; margin-bottom: 40px; }
+.logo span { color: #cc00ff; }
+.nav-item { display: block; color: #888; text-decoration: none; padding: 15px 0; transition: 0.3s; cursor: pointer; }
+.nav-item:hover { color: white; padding-left: 10px; }
+
+/* Main */
+.main-content { margin-left: 250px; padding: 30px; width: 100%; }
+.search-bar input { width: 100%; max-width: 400px; padding: 12px; border-radius: 8px; border: none; background: #222; color: white; }
+.anime-grid { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+.anime-card { background: #1a1a1a; border-radius: 12px; overflow: hidden; transition: 0.3s; }
+.anime-card:hover { transform: translateY(-5px); }
+.poster { height: 280px; background: #333; }
+.info { padding: 15px; }
+
+/* MODAL SYSTEM - ЖЕСТКАЯ ФИКСАЦИЯ */
+.modal { 
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.85); 
+    backdrop-filter: blur(8px);
+}
+
+.modal-content { 
+    position: absolute; 
+    top: 50%; left: 50%; 
+    transform: translate(-50%, -50%); /* ЦЕНТР */
+    background: #181818; 
+    width: 400px; 
+    padding: 30px; 
+    border-radius: 20px; 
+    border: 1px solid #333;
+    text-align: center;
+}
+
+
+.close { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; color: #666; }
+
+/* Tabs */
+.modal-tabs { display: flex; justify-content: center; gap: 20px; margin-bottom: 10px; }
+.tab-btn { background: none; border: none; color: #666; cursor: pointer; font-size: 16px; padding-bottom: 5px; }
+.tab-btn.active { color: #cc00ff; border-bottom: 2px solid #cc00ff; }
+.tab-divider { border: 0; height: 1px; background: #333; margin: 15px 0; }
+
+/* Profile View */
+.avatar-big { width: 100px; height: 100px; background: #333; border-radius: 50%; margin: 0 auto 15px; border: 3px solid #cc00ff; background-size: cover; }
+.badge { background: #cc00ff; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+.stats { display: flex; justify-content: space-around; margin-top: 25px; }
+.stat-item strong { display: block; font-size: 20px; }
+.stat-item span { color: #888; font-size: 12px; }
+
+/* Auth Section */
+.auth-container { padding: 20px 0; min-height: 120px; }
+#google-btn-container { display: flex; justify-content: center; margin-top: 15px; }
+.logout-btn { background: #cc00ff; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-weight: bold; width: 100%; }
+/* Основные настройки фона и текста */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0b0b0b; /* Глубокий черный цвет */
+    color: #ffffff;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 250px;
+    background: #121212;
+    padding: 30px 20px;
+    border-right: 1px solid #222;
+    position: fixed;
+    height: 100vh;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.logo span {
+    color: #cc00ff; /* Оранжевый акцент */
+}
+
+nav .nav-item {
+    display: block;
+    color: #888;
+    text-decoration: none;
+    padding: 12px 0;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+nav .nav-item:hover {
+    color: #ffffff;
+    padding-left: 10px;
+}
+
+/* Основной контент */
+.main-content {
+    margin-left: 250px;
+    padding: 40px;
+    width: 100%;
+}
+
+.search-bar input {
+    width: 100%;
+    max-width: 500px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: none;
+    background: #1a1a1a;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    border: 1px solid #333;
+}
+
+/* Модальное окно (Профиль) */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #181818;
+    width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    right: 20px; top: 15px;
+    font-size: 28px;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Табы внутри профиля */
+.modal-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 16px;
+    cursor: pointer;
+    padding-bottom: 8px;
+}
+
+.tab-btn.active {
+    color: #cc00ff;
+    border-bottom: 2px solid #cc00ff;
+}
+
+/* Аватар и Статистика */
+.avatar-big {
+    width: 100px;
+    height: 100px;
+    background: #333;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    border: 3px solid #cc00ff;
+}
+
+.badge {
+    background: #cc00ff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.edit-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-fields input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #252525;
+    color: white;
+    outline: none;
+}
+
+.edit-fields input:focus {
+    border-color: #cc00ff;
+}
+
+.save-btn {
+    background: #28a745; /* Зеленый цвет для сохранения */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.save-btn:hover {
+    background: #218838;
+}
+/* Фикс для редактора картинок */
+.cropper-container {
+    max-width: 100% !important;
+}
+
+#image-to-crop {
+    display: block;
+    max-width: 100%;
+}
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.anime-card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.anime-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(174, 0, 255, 0.2);
+    border-color: #cc00ff;
+}
+
+.anime-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+.anime-info {
+    padding: 15px;
+}
+
+.anime-info h3 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rating {
+    color: #ffc400;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Стили для плеера */
+.video-container {
+    width: 90% !important;
+    max-width: 1000px !important;
+    background: #000 !important;
+}
+
+.iframe-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Соотношение 16:9 */
+    height: 0;
+}
+
+.iframe-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 8px;
+}
+.anime-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    background-color: #333; /* Серый фон, если картинка не загрузилась */
+    display: block;
+}
+.anime-page { padding: 20px; color: white; }
+
+.back-btn {
+    background: #333; color: white; border: none; padding: 10px 20px;
+    border-radius: 5px; cursor: pointer; margin-bottom: 20px;
+}
+
+.anime-header { display: flex; gap: 30px; margin-bottom: 30px; }
+.anime-poster { width: 200px; border-radius: 10px; box-shadow: 0 0 20px #cc00ff; }
+.anime-details h1 { margin-top: 0; color: #cc00ff; }
+
+.player-section { display: flex; flex-direction: column; gap: 20px; }
+.video-wrapper { width: 100%; background: #000; border-radius: 15px; overflow: hidden; }
+video { width: 100%; aspect-ratio: 16/9; }
+
+.episodes-grid { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.episodes-grid button {
+    width: 50px; height: 50px; background: #222; border: 1px solid #444;
+    color: white; border-radius: 8px; cursor: pointer; transition: 0.3s;
+}
+.episodes-grid button.active-ep { background: #cc00ff; border-color: #cc00ff; }
+.episodes-grid button:hover { background: #444; }
+/* Контейнер страницы аниме */
+.anime-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Шапка с описанием */
+.anime-header {
+    display: flex;
+    gap: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px;
+}
+
+.anime-poster {
+    width: 220px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.anime-details h1 {
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    background: linear-gradient(90deg, #8c00ff, #1a0030);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Стилизация самого плеера */
+.video-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    border: 1px solid #333;
+    line-height: 0;
+}
+
+video#main-player {
+    width: 100%;
+    outline: none;
+    display: block;
+}
+
+/* Сетка серий */
+.episode-list {
+    margin-top: 30px;
+    background: rgba(20, 20, 20, 0.6);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.episodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.ep-btn {
+    aspect-ratio: 1;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ep-btn:hover {
+    background: #444;
+    border-color: #cc00ff;
+    transform: scale(1.1);
+}
+
+.ep-btn.active-ep {
+    background: #cc00ff;
+    border-color: #cc00ff;
+    box-shadow: 0 0 15px rgba(111, 0, 255, 0.5);
+    color: white;
+}
+
+/* Кнопка назад */
+.back-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: #aaa;
+    padding: 8px 18px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    border-color: #fff;
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+}
+/* Убираем кнопку скачивания и три точки в Chrome/Opera */
+video::-internal-media-controls-download-button {
+    display:none;
+}
+video::-webkit-media-controls-enclosure {
+    overflow:hidden;
+}
+video::-webkit-media-controls-panel {
+    width: calc(100% + 30px); /* Сдвигаем панель, чтобы скрыть меню */
+}
+
+/* Контейнер для нашего центрального плейера */
+.video-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Та самая всплывающая кнопка треугольника */
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.5);
+    width: 80px;
+    height: 80px;
+    background: rgba(183, 0, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none; /* Чтобы не мешала кликать по видео */
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 0 20px rgba(132, 0, 255, 0.418);
+}
+
+/* Рисуем треугольник внутри кнопки */
+.play-overlay::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 15px 0 15px 25px;
+    border-color: transparent transparent transparent #ffffff;
+    margin-left: 5px;
+}
+
+/* Когда видео на паузе, показываем кнопку */
+.video-wrapper.paused .play-overlay {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+/* Панель управления */
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 10px 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 15;
+}
+
+.video-wrapper:hover .video-controls {
+    opacity: 1;
+}
+
+/* Область прогресса */
+.progress-area {
+    height: 5px;
+    width: 96%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    position: relative;
+    border-radius: 10px;
+    transition: height 0.1s;
+}
+
+.progress-area:hover {
+    height: 8px;
+}
+
+/* Сама оранжевая полоса */
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #ae00ff;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(152, 0, 223, 0.7);
+}
+
+/* Кнопки времени под полосой */
+.controls-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    color: #eee;
+    font-size: 12px;
+    font-family: monospace;
+}
+/* Общая панель */
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 15;
+    box-sizing: border-box;
+}
+
+.video-wrapper:hover .video-controls {
+    opacity: 1;
+}
+
+/* Кнопки управления */
+.control-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+
+/* Иконка Play/Pause (динамическая) */
+/* 1. Базовый размер контейнера кнопки */
+.play-icon {
+    position: relative;
+    width: 16px;
+    height: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 2. Рисуем две полоски (пауза) */
+.play-icon::before,
+.play-icon::after {
+    content: "";
+    width: 6px;
+    height: 100%;
+    background-color: #fff;
+    transition: all 0.3s ease; /* Плавный переход */
+}
+
+/* 3. ТРАНСФОРМАЦИЯ: Если видео на паузе (класс .paused), превращаем полоски в треугольник */
+.video-wrapper.paused .play-icon::before {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 9px 0 9px 16px; /* Рисуем треугольник границами */
+    border-color: transparent transparent transparent #fff;
+    background-color: transparent;
+}
+
+.video-wrapper.paused .play-icon::after {
+    opacity: 0; /* Прячем вторую полоску */
+    width: 0;
+}
+
+/* Иконка Fullscreen */
+.fullscreen-icon {
+    width: 18px;
+    height: 14px;
+    border: 2px solid #fff;
+    position: relative;
+}
+
+/* Полоска теперь занимает всё свободное место */
+.progress-area {
+    flex-grow: 1;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    border-radius: 10px;
+    position: relative;
+}
+
+.time-display {
+    color: #fff;
+    font-size: 13px;
+    font-family: monospace;
+    white-space: nowrap;
+}
+/* Плавное скрытие курсора и элементов управления */
+.video-wrapper.hide-controls {
+    cursor: none; /* Прячем курсор мыши */
+}
+
+/* Скрываем только сами кнопки и прогресс-бар, а не всю область! */
+.video-wrapper.hide-controls .video-controls,
+.video-wrapper.hide-controls .play-overlay {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Обязательно убедись, что само видео ВСЕГДА ловит мышь */
+#main-player {
+    cursor: default;
+}
+pointer-events
+.video-wrapper.hide-controls {
+    cursor: none; /* Скрываем курсор, если GUI скрыт */
+}
+.progress-area {
+    user-select: none; /* Запрещает выделение текста при перетаскивании */
+    -webkit-user-select: none;
+}
+/* Контейнер всей полосы (зона клика) */
+#progress-area {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#main-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #b500da;
+    position: absolute;
+    /* Плавный переход для обычного воспроизведения */
+    transition: width 0.2s ease-out; 
+}
+
+/* Когда мы тянем, убираем transition, чтобы полоска летела за мышкой без задержек */
+#progress-area.dragging #main-progress-bar {
+    transition: none !important;
+}
+
+/* Маленький кружок-ползунок (опционально, для красоты) */
+#main-progress-bar::after {
+    content: "";
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+#progress-area:hover #main-progress-bar::after,
+#progress-area.dragging #main-progress-bar::after {
+    opacity: 1;
+}
+/* Отключаем стандартное поведение при перетаскивании */
+.video-wrapper {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#progress-area {
+    /* Чтобы курсор всегда был рукой при взаимодействии */
+    cursor: pointer;
+}
+
+/* Это предотвратит "дерганье" при наведении на другие элементы */
+.video-wrapper.hide-controls {
+    pointer-events: auto !important;
+}
+
+.video-controls {
+    pointer-events: auto; /* Контролы всегда должны отвечать на клики */
+}
+/* Состояние скрытого интерфейса */
+.video-wrapper.hide-controls .video-controls,
+.video-wrapper.hide-controls .play-overlay {
+    opacity: 0;
+    pointer-events: auto !important; /* Чтобы нельзя было случайно кликнуть по невидимым кнопкам */
+    transition: opacity 0.5s ease;
+}
+
+/* Обычное состояние (видимое) */
+.video-controls {
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+.video-controls {
+    display: flex;
+    align-items: center;
+    pointer-events: none; /* Важно: сам контейнер "прозрачен" для кликов */
+}
+.control-btn, .time-display {
+    pointer-events: auto; /* Возвращаем кликабельность кнопкам */
+}
+.progress-area {
+    pointer-events: auto !important; /* Всегда ловит клик */
+    z-index: 10; /* Поднимаем её над остальными кнопками */
+    cursor: pointer;
+}
+.progress-area.dragging {
+    height: 10px; /* Опционально: делаем её чуть толще при перетаскивании */
+}
+.anime-card {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+#not-found h2 {
+    background: var(--main-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 24px;
+}
+.search-error-block {
+    width: 100%;
+    text-align: center;
+    padding: 100px 20px;
+    box-sizing: border-box;
+    display: none; /* Управляется через JS */
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-error-block h2 {
+    /* Сбрасываем всё размытие */
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-filter: none !important;
+    
+    /* Цвета и шрифт */
+    color: #00ffff !important; 
+    font-size: 32px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    /* Убираем прозрачность и градиенты */
+    background: none !important;
+    -webkit-text-fill-color: #a974ff !important;
+    
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(107, 0, 156, 0.5); /* Простая тень для объема */
+}
+
+.search-error-block p {
+    color: #ffffff;
+    font-size: 18px;
+    opacity: 0.7;
+    filter: none !important;
+}
+body {
+    /* Создаем длинный градиент из твоих фирменных цветов */
+    background: linear-gradient(-45deg, #0f0c29, #310070, #1a1a2e, #1a1a2e);
+    background-size: 400% 400%; /* Растягиваем фон, чтобы было куда двигаться */
+    
+    /* Запускаем анимацию: название, время, бесконечность */
+    animation: gradientBG 6s ease infinite;
+    
+    color: #ffffff;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+/* Описываем саму анимацию движения */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+/* Стили для контейнера навигации (проверь свой класс, если он отличается) */
+.sidebar nav ul li {
+    position: relative; /* Чтобы полоска привязывалась к пункту */
+    list-style: none;
+}
+
+/* Сама разделительная полоса */
+.sidebar nav ul li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%; /* Отступ слева, чтобы полоска не упиралась в край */
+    width: 80%; /* Длина полоски */
+    height: 1px; /* Толщина */
+    
+    /* Делаем её полупрозрачной и в цвет темы */
+    background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.4), transparent);
+    
+    margin-bottom: 5px; /* Расстояние до следующего текста */
+}
+
+/* Немного увеличим отступы между разделами для воздуха */
+.sidebar nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #a0a0a0;
+    transition: 0.3s;
+}
+
+/* Эффект при наведении на раздел */
+.sidebar nav ul li a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+/* Находим пункты списка в твоем меню */
+.sidebar nav ul li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Добавляем линию именно к ссылке */
+.sidebar nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: #a0a0a0;
+    text-decoration: none;
+    
+    /* Вот она — разделительная линия */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+    transition: all 0.3s ease;
+}
+
+/* Убираем линию у последнего пункта (Настройки), чтобы было красиво */
+.sidebar nav ul li:last-child a {
+    border-bottom: none;
+}
+
+/* Эффект при наведении — линия становится ярче */
+.sidebar nav ul li a:hover {
+    color: #ffffff;
+    background: rgba(138, 43, 226, 0.1);
+    border-bottom: 1px solid rgba(138, 43, 226, 0.4);
+}
+/* Находим навигацию в твоем меню */
+.sidebar nav ul {
+    padding: 0;
+    margin: 20px 0; /* Отступ сверху от логотипа */
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    width: 100%;
+    /* Добавляем тонкую линию снизу каждого пункта */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+}
+
+/* Убираем линию у последнего пункта, чтобы не висела в пустоте */
+.sidebar nav ul li:last-child {
+    border-bottom: none;
+}
+
+.sidebar nav ul li a {
+    display: block;
+    padding: 18px 25px; /* Увеличили область клика и воздух */
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Эффект при наведении */
+.sidebar nav ul li a:hover {
+    color: #ffffff;
+    background: rgba(138, 43, 226, 0.1); /* Легкий фиолетовый блик */
+    padding-left: 30px; /* Эффект сдвига вправо при наведении */
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeGo Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h1 class="logo">Ani<span>Draft</span></h1>
+        <nav>
+    <div class="nav-item" onclick="location.reload()">Главная</div>
+    <div class="nav-item">Каталог</div>
+    <div class="nav-item" onclick="openModal()">Профиль</div>
+<div class="nav-item" onclick="openModal(); document.getElementById('settings-tab-btn').click()">Настройки</div>
+</nav>
+    </div>
+
+    <div class="main-content">
+        <div class="search-bar">
+            <input type="text" id="anime-search" placeholder="Поиск аниме...">
+            <div class="anime-grid" id="anime-container">
+    </div>
+
+<div id="videoModal" class="modal">
+    <div class="modal-content video-container">
+        <span class="close" onclick="closeVideo()">&times;</span>
+        <h2 id="video-title" style="margin-bottom: 15px;">Название аниме</h2>
+        <div class="iframe-wrapper">
+            <iframe id="anime-player" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+        </div>
+
+        
+        <div id="not-found" class="search-error-block" style="display: none;">
+    <h2>Упс! Ничего не нашлось</h2>
+    <p>Попробуйте изменить запрос или проверить раскладку</p>
+</div>
+    </div>
+    
+
+</div>
+
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('profileModal')">&times;</span>
+            
+            <div class="modal-tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'view-profile')">Обзор</button>
+                <button class="tab-btn" onclick="switchTab(event, 'edit-profile')">Настройки</button>
+            </div>
+
+            <hr class="tab-divider">
+
+            <div id="view-profile" class="tab-content" style="display: block;">
+                <div class="profile-header">
+                    <div id="user-avatar" class="avatar-big"></div>
+                    <h2 id="display-name">Гость</h2>
+                    <span class="badge">User</span>
+                </div>
+                <div class="stats">
+                    <div class="stat-item"><strong>12</strong><span>Смотрю</span></div>
+                    <div class="stat-item"><strong>145</strong><span>Просмотрено</span></div>
+                    <div class="stat-item"><strong>5</strong><span>Брошено</span></div>
+                </div>
+            </div>
+
+            <div id="edit-profile" class="tab-content" style="display: none;">
+    <div id="login-section">
+        <p style="margin-bottom: 15px; color: #aaa;">Войдите через Google:</p>
+        <div id="google-btn-container"></div>
+    </div>
+    
+    <div id="logout-section" style="display: none;">
+        <div class="edit-fields">
+            <p style="margin-bottom: 10px; font-size: 14px; color: #888;">Изменить имя:</p>
+            <input type="text" id="new-name-input" placeholder="Новый ник">
+            
+            <p style="margin: 10px 0; font-size: 14px; color: #888;">Изменить фото:</p>
+            <label for="file-input" class="save-btn" style="background: #007bff; display: block; text-align: center; cursor: pointer; margin-bottom: 10px;">
+                Выбрать фото с устройства
+            </label>
+            <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+            
+            <button class="save-btn" onclick="saveProfileChanges()" style="background: #28a745; width: 100%;">Применить изменения</button>
+        </div>
+        <hr class="divider" style="margin: 20px 0;">
+        <button class="logout-btn" onclick="logout()" style="width: 100%;">Выйти из аккаунта</button>
+    </div>
+</div>
+        </div>
+    </div>
+
+<div id="logout-section" style="display: none;">
+    <p style="margin-bottom: 20px; font-weight: bold;">Редактирование профиля</p>
+    
+    <div class="edit-fields">
+        <input type="text" id="new-name-input" placeholder="Новый ник">
+        <label for="file-input" class="save-btn" style="background: #007bff; text-align: center;">Выбрать фото с устройства</label>
+        <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+        
+        <input type="text" id="new-avatar-input" placeholder="Или вставьте ссылку на фото">
+        <button class="save-btn" onclick="saveProfileChanges()">Применить изменения</button>
+    </div>
+
+    <hr class="divider">
+    <button class="logout-btn" onclick="logout()">Выйти из аккаунта</button>
+</div>
+
+<div id="cropperModal" class="modal" style="z-index: 10001;">
+    <div class="modal-content" style="width: 90%; max-width: 500px;">
+        <h3 style="margin-bottom: 15px;">Обрежьте фото</h3>
+        <div style="height: 300px; background: #000; position: relative;">
+            <img id="image-to-crop" style="display: block; max-width: 100%;">
+        </div>
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button class="save-btn" style="flex: 1;" onclick="applyCrop()">Готово</button>
+            <button class="logout-btn" style="flex: 1; background: #444;" onclick="closeCropper()">Отмена</button>
+        </div>
+    </div>
+</div>
+    </div>
+</div><div id="cropperModal" class="modal" style="z-index: 10001;">
+    <div class="modal-content" style="width: 90%; max-width: 500px; background: #1a1a1a;">
+        <span class="close" onclick="closeCropper()">&times;</span>
+        <h3 style="margin-bottom: 15px;">Обрежьте фото профиля</h3>
+        
+        <div style="height: 350px; background: #000; overflow: hidden; border-radius: 10px;">
+            <img id="image-to-crop" style="display: block; max-width: 100%;">
+        </div>
+        
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button class="save-btn" style="flex: 1; background: #28a745;" onclick="applyCrop()">Готово</button>
+            <button class="logout-btn" style="flex: 1; background: #444;" onclick="closeCropper()">Отмена</button>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>

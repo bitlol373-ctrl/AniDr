@@ -1,0 +1,22 @@
+[
+    {
+        "id": "chainsaw-man",
+        "title": "Человек-бензопила",
+        "episodes": [
+            {
+                "num": 1,
+                "file_id": "ЗДЕСЬ_ID_ОТ_БОТА"
+            }
+        ]
+    },
+    {
+        "id": "1",
+        "title": "Магическая битва 3",
+        "episodes": [
+            {
+                "num": 1,
+                "file_id": "BAACAgIAAxkBAAMCaYyHnKQnEItQoc1F7OmcxFs2BiIAAnmSAALVn_lLoXcYLPtCxVU6BA"
+            }
+        ]
+    }
+]
